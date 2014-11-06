@@ -18,7 +18,7 @@ from enaml.image import Image
 from enaml.layout.api import vbox, hbox, spacer
 from enaml.widgets.api import Window, Container, ComboBox, ImageView,PushButton
 
-from enaml.workbench.barnav.api import load_icon2
+from barnav.api import load_icon2
 
 
 
@@ -33,13 +33,19 @@ IMAGES = {
     'Image C': Image(data=open(image_path('img3.png'), 'rb').read()),
 }
 
-WELCOM_ICON =  load_icon2('welcome','welcomes')
 
-DICOMRT_ICON = load_icon2('dicomrt','dicomrts')
 
-TRAJECTORY_ICON = load_icon2('trajectory','trajectorys')
+iconimage_path = os.path.join(os.path.dirname(__file__), 'images')
 
-CLOUDMCSIM_ICON = load_icon2('cloudmcsim','cloudmcsims')
+
+
+WELCOM_ICON =  load_icon2(iconimage_path,'welcome','welcomes')
+
+DICOMRT_ICON = load_icon2(iconimage_path,'dicomrt','dicomrts')
+
+TRAJECTORY_ICON = load_icon2(iconimage_path,'trajectory','trajectorys')
+
+CLOUDMCSIM_ICON = load_icon2(iconimage_path,'cloudmcsim','cloudmcsims')
 
 
 
