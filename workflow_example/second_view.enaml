@@ -7,7 +7,7 @@
 #------------------------------------------------------------------------------
 from enaml.widgets.api import Container, Form, Label, Field
 from enaml.workbench.api import Extension, PluginManifest
-from enaml.workbench.ui.api import ActionItem, MenuItem
+from workflow.api import ActionItem, MenuItem
 
 
 print 'Imported Second View!'
@@ -39,20 +39,20 @@ enamldef SecondManifest(PluginManifest):
     id = 'sample.second'
     Extension:
         id = 'actions'
-        point = 'enaml.workbench.ui.actions'
+        point = 'enaml.workbench.workflow.actions'
         MenuItem:
             path = '/preferences'
             label = 'Preferences'
             after = 'file'
-            before = 'workspace'
+            before = 'worknode'
         MenuItem:
             path = '/window'
             label = 'Window'
-            before = 'workspace'
+            before = 'worknode'
         MenuItem:
             path = '/help'
             label = 'Help'
-            after = 'workspace'
+            after = 'worknode'
         ActionItem:
             path = '/preferences/save'
             label = 'Save'

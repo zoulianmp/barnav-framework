@@ -27,12 +27,12 @@ enamldef FirstManifest(PluginManifest):
     id = 'sample.first'
     Extension:
         id = 'actions'
-        point = 'enaml.workbench.ui.actions'
+        point = 'enaml.workbench.workflow.actions'
         MenuItem:
             path = '/edit'
             label = 'Edit'
             after = 'file'
-            before = 'workspace'
+            before = 'worknode'
             ItemGroup:
                 id = 'first'
         ActionItem:

@@ -11,7 +11,7 @@ This example serves to demostrates the concepts described the accompanying
 developer crash source document.
 
 """
-from barnav.api import UIWorkbench
+from workflow.api import WorkflowWorkbench
 
 
 if __name__ == '__main__':
@@ -19,8 +19,8 @@ if __name__ == '__main__':
     with enaml.imports():
         from sample_plugin import SampleManifest
         from enaml.workbench.core.core_manifest import CoreManifest
-        from barnav.ui_manifest import UIManifest
+        from workflow.workflow_manifest import WorkflowManifest
 
-    workbench = UIWorkbench()
+    workbench = WorkflowWorkbench()
     workbench.register(SampleManifest())
     workbench.run()

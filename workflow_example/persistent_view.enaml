@@ -9,7 +9,7 @@ from enaml.layout.api import HSplitLayout, InsertItem
 from enaml.widgets.api import Container, DockArea, DockItem, Html
 from enaml.workbench.api import Extension, PluginManifest
 from enaml.workbench.core.api import Command
-from enaml.workbench.ui.api import ActionItem, MenuItem
+from workflow.api import ActionItem, MenuItem
 
 
 print 'Imported Persistent View!'
@@ -91,8 +91,8 @@ def new_item(event):
     """ The handler for the 'sample.persistent.new_item' command.
 
     """
-    ui = event.workbench.get_plugin('enaml.workbench.ui')
-    area = ui.workspace.content.find('the_dock_area')
+    workflow = event.workbench.get_plugin('enaml.workbench.workflow')
+    area = workflow.worknode.content.find('the_dock_area')
     count = len(area.dock_items())
     name = '_pane_%d' % count
     title = 'Pane %d' % count
@@ -104,8 +104,8 @@ def destroy_items(event):
     """ The handler for the 'sample.persistent.destroy_items' command.
 
     """
-    ui = event.workbench.get_plugin('enaml.workbench.ui')
-    area = ui.workspace.content.find('the_dock_area')
+    ui = event.workbench.get_plugin('enaml.workbench.workflow')
+    area = workflow.worknode.content.find('the_dock_area')
     for item in area.dock_items():
         item.destroy()
 
@@ -129,7 +129,7 @@ enamldef PersistentManifest(PluginManifest):
             handler = destroy_items
     Extension:
         id = 'actions'
-        point = 'enaml.workbench.ui.actions'
+        point = 'enaml.workbench.workflow.actions'
         MenuItem:
             path = '/debug'
             label = 'Debug'
@@ -140,7 +140,7 @@ enamldef PersistentManifest(PluginManifest):
         MenuItem:
             path = '/tools'
             label = 'Tools'
-            before = 'workspace'
+            before = 'worknode'
         ActionItem:
             path = '/debug/something'
             label = 'Something'

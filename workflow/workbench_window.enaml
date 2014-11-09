@@ -25,11 +25,11 @@ enamldef WorkbenchWindow(MainWindow):
     attr window_model: WindowModel
     title << make_title(
         window_model.branding.title,
-        window_model.workspace.window_title,
+        window_model.worknode.window_title,
     )
     icon << window_model.branding.icon
     MenuBar:
         Include:
             objects << window_model.menus
     Include:
-        objects << filter(None, [window_model.workspace.content])
+        objects << filter(None, [window_model.worknode.content])

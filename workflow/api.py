@@ -10,7 +10,7 @@ from .autostart import Autostart
 from .branding import Branding
 from .item_group import ItemGroup
 from .menu_item import MenuItem
-from .ui_workbench import UIWorkbench
-from .workspace import Workspace
+from .workflow_workbench import WorkflowWorkbench
+from .worknode import Worknode
 
 from .icons_utils import load_icon, load_icon2
