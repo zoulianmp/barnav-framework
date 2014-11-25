@@ -11,16 +11,30 @@ This example serves to demostrates the concepts described the accompanying
 developer crash source document.
 
 """
-from workflow.api import WorkflowWorkbench
+from workflow.api import WorkflowWorkbench,get_worknodes_naviagate_parameters
 
 
 if __name__ == '__main__':
     import enaml
     with enaml.imports():
         from sample_plugin import SampleManifest
-        from enaml.workbench.core.core_manifest import CoreManifest
-        from workflow.workflow_manifest import WorkflowManifest
+#        from enaml.workbench.core.core_manifest import CoreManifest
+#        from workflow.workflow_manifest import WorkflowManifest
 
     workbench = WorkflowWorkbench()
     workbench.register(SampleManifest())
+    
+#    workbench.register(CoreManifest())
+#    
+#    workbench.register(WorkflowManifest())
+#    
+#    
+    
+    
+    
+#    af = get_worknodes_naviagate_parameters(workbench)
+    
+    
+    
+    
     workbench.run()

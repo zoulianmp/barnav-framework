@@ -1,0 +1,137 @@
+#------------------------------------------------------------------------------
+# Copyright (c) 2013, Nucleic Development Team.
+#
+# Distributed under the terms of the Modified BSD License.
+#
+# The full license is in the file COPYING.txt, distributed with this software.
+#------------------------------------------------------------------------------
+from enaml.core.api import Include, Looper
+from enaml.widgets.main_window import MainWindow
+from enaml.widgets.menu_bar import MenuBar
+from .workflow_workbench import WorkflowWorkbench
+
+from .workflow_window_model import WorkflowWindowModel
+
+from enaml.widgets.api import (
+    Container, PushButton
+)
+
+
+from workflow.api import load_icon2,get_worknodes_naviagate_parameters
+from enaml.layout.api import hbox, vbox, spacer, align,vertical
+
+from enaml.layout.api import hbox, vbox, align, spacer,Box,Rect
+from enaml.widgets.api import (
+    Window, Container, Label, Field, SpinBox, PushButton, VGroup,
+    GroupBox,
+)
+from enaml.core.api import Include
+
+
+
+import os
+
+
+iconimage_path = os.path.join(os.path.dirname('__file__'), 'navbar_icons')
+
+
+
+
+
+
+def make_title(primary, workspace):
+    return u' - '.join(filter(None, (primary, workspace)))
+
+
+
+
+
+
+enamldef NavigateBar(Container):
+#    attr workbench: WorkflowWorkbench
+    attr navi_params 
+
+  
+
+    padding = 0  
+#    constraints = [ vertical(top, pt1, pt2, pt3, pt4, pt5, pt6, bottom),
+#              # contents_top == pt1.top  
+#        ]
+
+#    padding = 0
+    GroupBox: grp_box:
+        Looper: looper:
+            iterable << navi_params
+            PushButton:
+                text = 'pb %s' % loop_index
+    
+           
+            PushButton: pt1:
+                icon = load_icon2(iconimage_path,loop_item[0],loop_item[1])
+                icon_size = (48,48)
+                clicked :: print 'I was clicked!'
+    
+
+
+        
+              
+
+
+
+
+enamldef WorkbenchWindow(MainWindow):
+    """ The custom MainWindow enamldef used by the Enaml studio.
+
+    """
+    attr workbench: WorkflowWorkbench
+    attr window_model: WorkflowWindowModel
+    title << make_title(
+        window_model.branding.title,
+        window_model.worknode.window_title,
+    )
+    icon << window_model.branding.icon
+    MenuBar:
+        Include:
+            objects << window_model.menus
+    Include:
+        objects << filter(None, [window_model.worknode.content])
+
+
+enamldef WorkflowWorkbenchWindow(MainWindow):
+    """ The custom MainWindow enamldef used by the Enaml studio.
+
+    """
+    attr workbench: WorkflowWorkbench
+    attr window_model: WorkflowWindowModel
+    
+    title << make_title(
+            window_model.branding.title,
+            window_model.worknode.window_title,
+        )
+    icon << window_model.branding.icon
+     
+    MenuBar:
+        Include:
+            objects << window_model.menus
+       
+     
+    Container:
+       
+        constraints = [          
+                    hbox(nav_bar, right_content),
+                    nav_bar.width == 0.07 * right_content.width,
+        ]
+    
+        NavigateBar: nav_bar:
+            padding = 0   
+            navi_params << get_worknodes_naviagate_parameters(workbench)
+           
+    
+    
+    
+        Container: right_content:
+            padding = 5
+            Include: 
+                objects << filter(None, [window_model.worknode.content])
+
+      

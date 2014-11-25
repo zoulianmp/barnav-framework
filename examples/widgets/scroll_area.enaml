@@ -17,7 +17,7 @@ policy can be changed through the attributes 'horizontal_scrollbar' and
 << autodoc-me >>
 """
 from enaml.widgets.api import (
-    Window, ScrollArea, Form, Label, Field, Container,
+    Window, ScrollArea, Form, Label, Field, Container,PushButton
 )
 
 
@@ -27,6 +27,8 @@ enamldef Main(Window):
         padding = 0
         ScrollArea:
             constraints = [width >= 200]
+            PushButton: pt6:
+                text = 'Toggle Me'
             Form:
                 Label:
                     text = "First name:"

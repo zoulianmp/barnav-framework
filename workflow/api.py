@@ -13,4 +13,6 @@ from .menu_item import MenuItem
 from .workflow_workbench import WorkflowWorkbench
 from .worknode import Worknode
 
-from .icons_utils import load_icon, load_icon2
+
+from utils import load_icon, load_icon2,get_extensions_of_extensionpoint, \
+                  get_worknodes_naviagate_parameters

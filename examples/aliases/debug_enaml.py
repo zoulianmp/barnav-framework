@@ -11,7 +11,7 @@ from enaml.qt.qt_application import QtApplication
 
 def main():
     with enaml.imports():
-        from group_box import Main
+        from buttons import Main
 
     app = QtApplication()
 

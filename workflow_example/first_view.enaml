@@ -13,9 +13,95 @@ from enaml.workbench.ui.api import ActionItem, MenuItem, ItemGroup
 print 'Imported First View!'
 
 
+
+
+
+
+import os
+
+from enaml.icon import Icon,IconImage
+from enaml.image import Image
+from enaml.layout.api import vbox, hbox, spacer
+from enaml.widgets.api import Window, Container, ComboBox, ImageView,PushButton
+
+from workflow.api import load_icon2
+
+
+
+def image_path(name):
+    dirname = os.path.dirname(__file__)
+    return os.path.join(dirname, 'images', name)
+
+
+IMAGES = {
+    'Image A': Image(data=open(image_path('img1.png'), 'rb').read()),
+    'Image B': Image(data=open(image_path('img2.png'), 'rb').read()),
+    'Image C': Image(data=open(image_path('img3.png'), 'rb').read()),
+}
+
+
+
+iconimage_path = os.path.join(os.path.dirname(__file__), 'images')
+
+
+
+WELCOM_ICON =  load_icon2(iconimage_path,'welcome.png','welcomes.png')
+
+DICOMRT_ICON = load_icon2(iconimage_path,'dicomrt.png','dicomrts.png')
+
+TRAJECTORY_ICON = load_icon2(iconimage_path,'trajectory.png','trajectorys.png')
+
+CLOUDMCSIM_ICON = load_icon2(iconimage_path,'cloudmcsim.png','cloudmcsims.png')
+
+
+
+
+
+
+
+
 enamldef FirstView(Container):
-    Html:
-        source = '<h1><center>Hello World!</center></h1>'
+        constraints = [
+            vbox(hbox(pt1,pt2,pt3,pt4,spacer),
+                 hbox(cbox, spacer), 
+                 img),
+        ]
+       
+        PushButton: pt1:
+          #  text = 'Push Me'
+            icon = WELCOM_ICON
+            icon_size = (48,48)
+            clicked :: print 'I was clicked!'
+
+        PushButton: pt2:
+            #text = 'Toggle Me'
+            icon = DICOMRT_ICON
+            icon_size = (48,48)
+            checkable = True
+            toggled :: print 'I was toggled'
+         
+        PushButton: pt3:
+           # text = 'Push Me'
+            icon = TRAJECTORY_ICON
+            icon_size = (48,48)
+            clicked :: print 'I was clicked!'
+
+        PushButton: pt4:
+           # text = 'Push Me'
+            icon = CLOUDMCSIM_ICON
+            icon_size = (48,48)
+            clicked :: print 'I was clicked!'
+
+        ComboBox: cbox:
+            items = sorted(IMAGES.keys())
+            index = 0
+        ImageView: img:
+            image << IMAGES[cbox.selected_item]
+
+ 
+
+
+
 
 
 enamldef FirstManifest(PluginManifest):

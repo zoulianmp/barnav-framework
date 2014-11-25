@@ -12,14 +12,14 @@ this time we change the default inter-element spacing from 10 to 30.
 
 << autodoc-me >>
 """
-from enaml.layout.api import hbox
+from enaml.layout.api import vbox
 from enaml.widgets.api import Window, Container, PushButton
 
 
 enamldef Main(Window):
     Container:
         constraints = [
-            hbox(pb1, pb2, pb3, spacing=30)
+            vbox(pb1, pb2, pb3, spacing=300)
         ]
         PushButton: pb1:
             text = 'Spam'

@@ -1,3 +1,4 @@
+
 #------------------------------------------------------------------------------
 # Copyright (c) 2013, Nucleic Development Team.
 #
@@ -13,7 +14,7 @@ from .branding import Branding
 from .worknode import Worknode
 
 
-class WindowModel(Atom):
+class WorkflowWindowModel(Atom):
     """ A model which is used to drive the WorkbenchWindow instance.
 
     """
@@ -22,6 +23,7 @@ class WindowModel(Atom):
 
     #: The menu objects for the menu bar.
     menus = List(Menu)
+    
 
     #: The currently active workspace for the window.
     worknode = Typed(Worknode, ())

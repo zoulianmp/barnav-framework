@@ -16,11 +16,18 @@ def first_view_factory(workbench):
     with enaml.imports():
         from first_view import FirstView, FirstManifest
 
-    space = SampleWorknode()
-    space.window_title = 'First View'
-    space.content_def = FirstView
-    space.manifest_def = FirstManifest
-    return space
+    node = SampleWorknode()
+    node.window_title = 'First View'
+    node.content_def = FirstView
+    node.manifest_def = FirstManifest
+    
+    #navigate parameters
+    
+    node.navigate_icon_normal = 'dicomrt.png'
+    node.navigate_icon_active = 'dicomrts.png'  
+    node.navigate_position =0
+
+    return node
 
 
 def second_view_factory(workbench):
@@ -30,18 +37,27 @@ def second_view_factory(workbench):
     with enaml.imports():
         from second_view import SecondView, SecondManifest
 
-    space = SampleWorknode()
-    space.window_title = 'Second View'
-    space.content_def = SecondView
-    space.manifest_def = SecondManifest
-    return space
+    node = SampleWorknode()
+    node.window_title = 'Second View'
+    node.content_def = SecondView
+    node.manifest_def = SecondManifest
+
+    node.navigate_icon_normal = 'cloudmc.png'
+    node.navigate_icon_active = 'cloudmcs.png'  
+    node.navigate_position =1
+
+    return node
 
 
 def persistent_view_factory(workbench):
     from persistent_worknode import PersistentWorknode
-    space = PersistentWorknode()
-    space.window_title = 'Persistent View'
-    return space
+    node = PersistentWorknode()
+    node.window_title = 'Persistent View'
+
+    node.navigate_icon_normal = 'dataanalysis.png'
+    node.navigate_icon_active = 'dataanalysiss.png'  
+    node.navigate_position =2
+    return node
 
 
 enamldef SampleManifest(PluginManifest):
@@ -70,7 +86,7 @@ enamldef SampleManifest(PluginManifest):
             path = '/worknode'
             label = 'worknode'
             ItemGroup:
-                id = 'spaces'
+                id = 'nodes'
         ActionItem:
             path = '/file/close'
             label = 'Close'
@@ -80,21 +96,21 @@ enamldef SampleManifest(PluginManifest):
             path = '/worknode/first'
             label = 'First'
             shortcut = 'Ctrl+1'
-            group = 'spaces'
+            group = 'nodes'
             command = 'enaml.workbench.workflow.select_worknode'
             parameters = {'worknode': 'sample.first_view'}
         ActionItem:
             path = '/worknode/second'
             label = 'Second'
             shortcut = 'Ctrl+2'
-            group = 'spaces'
+            group = 'nodes'
             command = 'enaml.workbench.workflow.select_worknode'
             parameters = {'worknode': 'sample.second_view'}
         ActionItem:
             path = '/worknode/persistent'
             label = 'Persistent'
             shortcut = 'Ctrl+3'
-            group = 'spaces'
+            group = 'nodes'
             command = 'enaml.workbench.workflow.select_worknode'
             parameters = {'worknode': 'sample.persistent_view'}
         ActionItem:
@@ -105,7 +121,7 @@ enamldef SampleManifest(PluginManifest):
     Extension:
         id = 'first_view'
         point = 'enaml.workbench.workflow.worknodes'
-        factory = first_view_factory
+        factory = first_view_factory 
     Extension:
         id = 'second_view'
         point = 'enaml.workbench.workflow.worknodes'
