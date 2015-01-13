@@ -45,13 +45,13 @@ iconimage_path = os.path.join(os.path.dirname(__file__), 'images')
 
 
 
-WELCOM_ICON =  load_icon2(iconimage_path,'welcome.png','welcomes.png')
+WELCOM_ICON =  load_icon2('welcome.png','welcomes.png')
 
-DICOMRT_ICON = load_icon2(iconimage_path,'dicomrt.png','dicomrts.png')
+DICOMRT_ICON = load_icon2('dicomrt.png','dicomrts.png')
 
-TRAJECTORY_ICON = load_icon2(iconimage_path,'trajectory.png','trajectorys.png')
+TRAJECTORY_ICON = load_icon2('trajectory.png','trajectorys.png')
 
-CLOUDMCSIM_ICON = load_icon2(iconimage_path,'cloudmcsim.png','cloudmcsims.png')
+CLOUDMCSIM_ICON = load_icon2('cloudmcsim.png','cloudmcsims.png')
 
 
 

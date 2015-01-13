@@ -84,13 +84,13 @@ enamldef Main(Window):
         padding = 0
         Splitter:
             SplitItem:
-                stretch = 0
-                collapsible = False
+                stretch = 1
+#                collapsible = False
                 MyForm:
                     pass
-            SplitItem:
-                MyForm:
-                    pass
+#            SplitItem:
+#                MyForm:
+#                    pass
             SplitItem:
                 stretch = 2
                 MyHtmlWidgets:

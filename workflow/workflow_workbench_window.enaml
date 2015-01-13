@@ -17,24 +17,21 @@ from enaml.widgets.api import (
 )
 
 
-from workflow.api import load_icon2,get_worknodes_naviagate_parameters
+from workflow.api import load_icon2,get_worknodes_naviagate_parameters,update_iconpath, \
+                         iconimage_path
+
+
+
+
+
 from enaml.layout.api import hbox, vbox, spacer, align,vertical
 
 from enaml.layout.api import hbox, vbox, align, spacer,Box,Rect
 from enaml.widgets.api import (
     Window, Container, Label, Field, SpinBox, PushButton, VGroup,
-    GroupBox,
+    GroupBox, Splitter, SplitItem,
 )
 from enaml.core.api import Include
-
-
-
-import os
-
-
-iconimage_path = os.path.join(os.path.dirname('__file__'), 'navbar_icons')
-
-
 
 
 
@@ -48,32 +45,23 @@ def make_title(primary, workspace):
 
 
 enamldef NavigateBar(Container):
-#    attr workbench: WorkflowWorkbench
+    attr navi_workbench: WorkflowWorkbench
     attr navi_params 
 
   
 
     padding = 0  
-#    constraints = [ vertical(top, pt1, pt2, pt3, pt4, pt5, pt6, bottom),
-#              # contents_top == pt1.top  
-#        ]
 
-#    padding = 0
-    GroupBox: grp_box:
-        Looper: looper:
-            iterable << navi_params
-            PushButton:
-                text = 'pb %s' % loop_index
-    
-           
-            PushButton: pt1:
-                icon = load_icon2(iconimage_path,loop_item[0],loop_item[1])
-                icon_size = (48,48)
-                clicked :: print 'I was clicked!'
-    
+    Looper: looper:
+        iterable << navi_params
+         
+        PushButton:
+            icon = load_icon2(loop_item[0],loop_item[1])
+            icon_size = (48,48)
+            clicked :: 
+               workflow = workbench.get_plugin('enaml.workbench.workflow')
+               workflow.select_worknode(loop_item[2])
 
-
-        
               
 
 
@@ -113,25 +101,32 @@ enamldef WorkflowWorkbenchWindow(MainWindow):
     MenuBar:
         Include:
             objects << window_model.menus
-       
-     
     Container:
-       
-        constraints = [          
-                    hbox(nav_bar, right_content),
-                    nav_bar.width == 0.07 * right_content.width,
-        ]
-    
-        NavigateBar: nav_bar:
-            padding = 0   
-            navi_params << get_worknodes_naviagate_parameters(workbench)
-           
-    
-    
-    
-        Container: right_content:
-            padding = 5
-            Include: 
-                objects << filter(None, [window_model.worknode.content])
+        padding = 0   
+        Splitter:
+            orientation = 'horizontal'
+            hug_width = 'strong'
+          
+            SplitItem: navbar:
 
+                stretch = 1
+                collapsible = False
+                NavigateBar: nav_bar:
+                    navi_workbench << workbench
+                    padding = 0   
+                    navi_params << get_worknodes_naviagate_parameters(workbench)
+                   
+        
+            SplitItem: nodecontent:
+                stretch = 120  
+                collapsible = False    
+                Container: right_content:
+                    padding = 0
+                    Include: 
+                        objects << filter(None, [window_model.worknode.content])
+    
+          
+ 
       
+    
+    

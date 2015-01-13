@@ -1,4 +1,4 @@
-#------------------------------------------------------------------------------
+ #------------------------------------------------------------------------------
 # Copyright (c) 2013, Nucleic Development Team.
 #
 # Distributed under the terms of the Modified BSD License.
@@ -15,6 +15,15 @@ from workflow.api import WorkflowWorkbench,get_worknodes_naviagate_parameters
 
 
 if __name__ == '__main__':
+    
+
+    
+    from workflow.api import update_iconpath
+    
+    #Set the workflow icons path
+    update_iconpath(__file__)
+    
+    
     import enaml
     with enaml.imports():
         from sample_plugin import SampleManifest

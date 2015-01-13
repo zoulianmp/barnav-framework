@@ -15,11 +15,19 @@ This is the Entry point for Invoke the Test codes
 
 """
 
-from test.test_volume_image_slice_views import test_volume_image_slicer
+#from test.test_volume_image_slice_views import test_volume_image_slicer
 
-from test.test_dicom_exporter import test_dicom_exporter
+#from test.test_dicom_exporter import test_dicom_exporter
 
 if __name__ == '__main__':
     
-    test_dicom_exporter()
-    test_volume_image_slicer()
+    import os
+    root1 = os.path.dirname(__file__)
+    
+    print "root1: ",root1
+    
+    print "the end"
+    
+#    test_dicom_exporter()
+#    test_volume_image_slicer()
+ 

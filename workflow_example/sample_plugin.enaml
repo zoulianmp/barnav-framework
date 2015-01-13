@@ -42,8 +42,8 @@ def second_view_factory(workbench):
     node.content_def = SecondView
     node.manifest_def = SecondManifest
 
-    node.navigate_icon_normal = 'cloudmc.png'
-    node.navigate_icon_active = 'cloudmcs.png'  
+    node.navigate_icon_normal = 'cloudmcsim.png'
+    node.navigate_icon_active = 'cloudmcsims.png'  
     node.navigate_position =1
 
     return node

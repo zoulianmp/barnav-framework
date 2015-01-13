@@ -20,7 +20,7 @@ from enaml.widgets.api import Window, Container, ComboBox, ImageView,PushButton
 
 
 
-
+iconimage_path = '' 
 
 
 
@@ -55,11 +55,19 @@ def get_worknodes_naviagate_parameters(workbench):
     
     
     for ext in extensions:  
-        current_worknode = ext.factory(workbench)
+         #using the extension id
+        plugin_id = ext.plugin_id
+        ext_id = ext.id 
+        
+        #Select worknode need full id
+        node_id = plugin_id + '.' + ext_id 
+        
+        current_worknode = ext.factory(workbench) 
         post =current_worknode.navigate_position
         
         icontule = (current_worknode.navigate_icon_normal,
-                    current_worknode.navigate_icon_active)
+                    current_worknode.navigate_icon_active,
+                    node_id)
         
         nav_params[post]= icontule
    
@@ -85,7 +93,26 @@ def get_worknodes_naviagate_parameters(workbench):
 #icons utilities
 #************************************************************************
 
-def load_icon(path,name):    
+def update_iconpath(mainpath):
+    
+    
+    
+    global iconimage_path 
+  
+    
+    import os
+   
+    iconimage_path= os.path.join(os.path.dirname(mainpath), 'images')
+    
+    print "in the update_iconpath: ", iconimage_path
+
+
+
+    
+def load_icon(name): 
+    return _load_icon_(iconimage_path,name)
+
+def _load_icon_(path,name):    
     fname = os.path.join(path, name)
     with open(fname, 'rb') as f:
         data = f.read()
@@ -95,7 +122,12 @@ def load_icon(path,name):
     return Icon(images=[icg])
 
 
-def load_icon2(path,normalname,activename):
+
+def load_icon2(normalname,activename):
+    return _load_icon2_(iconimage_path,normalname,activename)
+
+
+def _load_icon2_(path,normalname,activename):
    
     normalfname = os.path.join(path, normalname)
      
