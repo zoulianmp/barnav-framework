@@ -11,7 +11,7 @@ This example serves to demostrates the concepts described the accompanying
 developer crash source document.
 
 """
-from workflow.api import WorkflowWorkbench,get_worknodes_naviagate_parameters
+from workflow.api import WorkflowWorkbench
 
 
 if __name__ == '__main__':

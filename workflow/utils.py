@@ -25,6 +25,18 @@ iconimage_path = ''
 
 
 
+#*************************************************************************
+#Default worknode 
+#*************************************************************************
+
+def set_default_worknode(workbench,worknode):
+
+    #set default selected worknode
+    workflow = workbench.get_plugin('enaml.workbench.workflow')   
+    workflow.select_worknode(worknode)
+
+
+
 
 #*************************************************************************
 #workbench extension point and extensions utils
@@ -71,7 +83,9 @@ def get_worknodes_naviagate_parameters(workbench):
         
         nav_params[post]= icontule
    
-   
+    #Set initial default worknode
+    set_default_worknode(workbench,nav_params[0][2])
+    
     return   nav_params
     
    
