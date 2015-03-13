@@ -11,7 +11,7 @@ from enaml.qt.qt_application import QtApplication
 
 def main():
     with enaml.imports():
-        from buttons import Main
+        from live_editor import Main
 
     app = QtApplication()
 

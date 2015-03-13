@@ -11,7 +11,7 @@ from enaml.qt.qt_application import QtApplication
 
 def main():
     with enaml.imports():
-        from splitter import Main
+        from mpl_canvas import Main
 
     app = QtApplication()
 
